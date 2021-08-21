@@ -27,7 +27,7 @@ def load_data(url):
     data = pd.read_csv(url)
     return data
 
-df = load_data("https://oracleselixir-downloadable-match-data.s3-us-west-2.amazonaws.com/2021_LoL_esports_match_data_from_OraclesElixir_20210820.csv")
+df = load_data("https://oracleselixir-downloadable-match-data.s3-us-west-2.amazonaws.com/2021_LoL_esports_match_data_from_OraclesElixir_20210819.csv")
 
 # Real time prediction
 class lol:
