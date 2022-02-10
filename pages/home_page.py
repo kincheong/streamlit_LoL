@@ -20,6 +20,9 @@ def app():
     """)
     st.write(f"*_Data as of {load_data.yesterday_textual}_")
     
+    if st.button("Refresh Data"):
+        load_data.data = load_data._load_data(load_data.data_link)
+        
     # Real time prediction
     class home:
         
