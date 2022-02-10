@@ -28,12 +28,7 @@ data_link = f"{url}{yesterday}.csv"
 
 try:
     with st.spinner("Loading Data"):
-<<<<<<< HEAD
         df = _load_data(f"{url}{yesterday}.csv")       
-=======
-        df = _load_data(r"2021_LoL_esports_match_data_from_OraclesElixir_20211231.csv")
-        #df = _load_data(f"{url}{yesterday}.csv")       
->>>>>>> 2cca3f977836c9038783d3162d2c0288f82c2fa7
 except:
     with st.spinner("Loading Data"):
         df = _load_data(r"2021_LoL_esports_match_data_from_OraclesElixir_20211231.csv")
