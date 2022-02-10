@@ -24,6 +24,7 @@ yesterday_textual = yesterday.strftime("%d %B %Y")
 yesterday = yesterday.strftime("%Y%m%d")
 
 url = "https://oracleselixir-downloadable-match-data.s3-us-west-2.amazonaws.com/" + year + "_LoL_esports_match_data_from_OraclesElixir_"
+data_link = f"{url}{yesterday}.csv"
 
 try:
     with st.spinner("Loading Data"):
