@@ -34,4 +34,4 @@ except:
     with st.spinner("Loading Data"):
         date_textual = "31 December 2021"
         data_link = "https://oracleselixir-downloadable-match-data.s3-us-west-2.amazonaws.com/2021_LoL_esports_match_data_from_OraclesElixir_20211231.csv"
-        data = _load_data(r"2021_LoL_esports_match_data_from_OraclesElixir_20211231.csv")
+        data = _load_data(r"data/2021_LoL_esports_match_data_from_OraclesElixir_20211231.csv")
