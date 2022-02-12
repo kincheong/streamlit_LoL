@@ -9,7 +9,7 @@ import pandas as pd
 import datetime
     
 # Get data
-@st.experimental_memo(show_spinner=False)
+@st.cache(show_spinner=False)
 def _load_data(url):
     data = pd.read_csv(url)
     return data
