@@ -11,18 +11,17 @@ import datetime
 from data import load_data
 
 def app():
-    
-    # Webpage description
-    st.title("Home")
-    st.markdown("""
-    * __Data Source__: [oracleselixir.com](https://oracleselixir.com/)  
-    
-    """)
-    st.write(f"*_Data as of {load_data.yesterday_textual}_")
-    
-    if st.button("Refresh Data"):
-        load_data.data = load_data._load_data(load_data.data_link)
         
+    # Webpage description
+    st.title("League of Legends Prediction App")
+    st.markdown(f"""
+    Hi, welcome to my web app 
+                
+    * __Data Source__: [oracleselixir.com](https://oracleselixir.com/) ([_Click to download data used_]({load_data.data_link}))  
+        
+    """)
+    st.write(f"*_Data as of {load_data.date_textual}_")
+    
     # Real time prediction
     class home:
         
@@ -31,6 +30,9 @@ def app():
             
             # We want individual champion data and not team data
             self.df = self.df[self.df['champion'].notna()]
+            
+            # Remove rows with missing patch
+            self.df = self.df[self.df['patch'].notna()]
     
     
         def _choose_patch(self):            
@@ -61,10 +63,19 @@ def app():
             
         def run(self):
             self._choose_patch()
-            self._generate_winrate_table()
-            
+            self._generate_winrate_table()        
         
     home_class = home(load_data.data)
     home_class.run()
-
-
+    
+    st.write("---")
+    st.subheader("Contact Me")
+    linkedin, facebook, fill, fill, fill = st.columns(5)
+    
+    with linkedin:
+        st.write("[Linkedin](https://www.linkedin.com/in/jacob-low/)")
+        st.image("https://cdn-icons-png.flaticon.com/512/174/174857.png", width=30)
+    
+    with facebook:
+        st.write("[Facebook](https://www.facebook.com/jacob.low.374/)")
+        st.image("https://cdn3.iconfinder.com/data/icons/capsocial-round/500/facebook-512.png", width=30)

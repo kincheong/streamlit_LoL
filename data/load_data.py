@@ -24,13 +24,14 @@ yesterday_textual = yesterday.strftime("%d %B %Y")
 yesterday = yesterday.strftime("%Y%m%d")
 
 url = "https://oracleselixir-downloadable-match-data.s3-us-west-2.amazonaws.com/" + year + "_LoL_esports_match_data_from_OraclesElixir_"
-data_link = f"{url}{yesterday}.csv"
 
 try:
     with st.spinner("Loading Data"):
-        df = _load_data(f"{url}{yesterday}.csv")       
+        date_textual = yesterday_textual
+        data_link = f"{url}{yesterday}.csv"
+        data = _load_data(data_link)       
 except:
     with st.spinner("Loading Data"):
-        df = _load_data(r"2021_LoL_esports_match_data_from_OraclesElixir_20211231.csv")
-
-data = df
+        date_textual = "31 December 2021"
+        data_link = "https://oracleselixir-downloadable-match-data.s3-us-west-2.amazonaws.com/2021_LoL_esports_match_data_from_OraclesElixir_20211231.csv"
+        data = _load_data(r"2021_LoL_esports_match_data_from_OraclesElixir_20211231.csv")

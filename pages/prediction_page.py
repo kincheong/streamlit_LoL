@@ -7,9 +7,7 @@ Created on Mon Aug 16 18:52:30 2021
 
 import streamlit as st
 import pandas as pd
-import numpy as np
-import shap
-import xgboost as xgb
+import lightgbm as lgb
 from data import load_data
 pd.options.mode.chained_assignment = None
 st.set_option('deprecation.showPyplotGlobalUse', False)
@@ -20,7 +18,6 @@ def app():
     st.title("Prediction!")
     st.markdown("""
     Win prediction based on team composition
-    * __Data Source__: [oracleselixir.com](https://oracleselixir.com/)  
     
     ---
     """)
@@ -36,6 +33,10 @@ def app():
             # We want individual champion data and not team data
             self.df = self.df[self.df['champion'].notna()]
     
+            # Remove rows with missing patch
+            self.df = self.df[self.df['patch'].notna()]
+
+
         def _choose_patch(self):
             # Finds the latest 5 patches
             patch_options = sorted(self.df['patch'].unique())[:-6:-1]
@@ -70,21 +71,9 @@ def app():
             X = train_df.drop(['result'], axis = 1)
             Y = train_df[['result']].values.ravel()   
             
-            dtrain = xgb.DMatrix(X, label = Y)
-            params = {
-                        "eta": 0.5,
-                        "max_depth": 4,
-                        "objective": "binary:logistic",
-                        "base_score": np.mean(Y),
-                        "eval_metric": "logloss"
-                    }
-                                
-            self.model = xgb.train(params, dtrain)    
-    
-            explainer = shap.Explainer(self.model)
-            shap_values = explainer.shap_values(X, approximate = True)
-            #fig = shap.summary_plot(shap_values, X, show = False)
-            #st.pyplot(fig)
+            self.clf = lgb.LGBMClassifier()
+            self.clf.fit(X, Y)
+            
             
         def _pick_champions(self):
             # Filter champion options for each role
@@ -182,15 +171,19 @@ def app():
             final_champ_df = final_champ_df.groupby(['id']).sum().reset_index()
             final_champ_df = final_champ_df.drop(['id'], axis = 1)
             
-            final_champ_df = xgb.DMatrix(final_champ_df)
                         
             # Prediction        
             st.subheader("Probability of winning")
-            prediction = self.model.predict(final_champ_df)
-            st.write(prediction)
-            #win_pct = prediction[:,1][0]
-                        
-            #st.write("{0:.0%}".format(win_pct))
+            prediction = self.clf.predict_proba(final_champ_df)
+            st.write(prediction[:,1][0])
+
+# =============================================================================
+#             prediction = self.model.predict(final_champ_df)
+#             st.write(prediction)
+#             #win_pct = prediction[:,1][0]
+#                         
+#             #st.write("{0:.0%}".format(win_pct))
+# =============================================================================
             
             
         def run(self):
@@ -211,3 +204,7 @@ def app():
     prediction_class.run()
 
 
+    with st.expander("How does the prediction work?"):
+     st.write("""
+         
+     """)
