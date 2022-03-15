@@ -1,13 +1,6 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Sun Aug 22 17:07:26 2021
-
-@author: Jacob
-"""
-
 import streamlit as st
 from multipage import MultiPage
-from pages import home_page, prediction_page
+from pages import home_page, analysis_page
 
 # Webpage configuration
 try:
@@ -33,6 +26,6 @@ app = MultiPage()
 
 st.sidebar.header("Menu")
 app.add_page("Home", home_page.app)
-app.add_page("Predict", prediction_page.app)
+app.add_page("Analysis", analysis_page.app)
 
 app.run()
