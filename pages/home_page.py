@@ -15,6 +15,8 @@ def app():
     based on historical competitive data. It is mainly a platform for me to upskill in simple web development, data wrangling,
     and machine learning. 
     """)
+    st.write("[Github Source](https://github.com/kincheong/streamlit_LoL)")
+    st.image("https://upload.wikimedia.org/wikipedia/commons/9/91/Octicons-mark-github.svg", width=30)
 
     # Data
     st.write("---")
@@ -77,7 +79,7 @@ def app():
             train_df = train_df.drop(['gameid','side'], axis = 1)
             
             X = train_df.drop(['result'], axis = 1)
-            Y = train_df[['result']].values
+            Y = train_df[['result']].values.ravel()
             
             self.clf = RandomForestClassifier(random_state=42)
             self.clf.fit(X, Y)
