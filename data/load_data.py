@@ -1,3 +1,5 @@
+from operator import index
+from re import X
 import streamlit as st
 import pandas as pd
 import datetime
@@ -42,4 +44,19 @@ def load_latest_data():
             st.error("Error in retrieving Latest Data, go back to Old Data!")
             st.stop()
 
+def choose_data():
+    st.write("---")
+    st.subheader("Data")
 
+    load_old_data()
+    choose_data = st.radio("Choose type of Data", ('Old Data', 'Latest Data (Data might take a few minutes to load)'))
+
+    if choose_data == 'Old Data':
+        load_old_data()
+    else:
+        load_latest_data()
+
+    st.markdown(f"""* __Data Source__: [oracleselixir.com](https://oracleselixir.com/) ([_Click to download data used_]({data_link}))""")
+
+    st.write(f"*_Data as of {date_textual}_")
+    st.write("---")
