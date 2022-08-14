@@ -1,6 +1,6 @@
 import streamlit as st
 from multipage import MultiPage
-from pages import home_page, analysis_page
+from allpages import home_page, analysis_page
 
 # Webpage configuration
 try:
