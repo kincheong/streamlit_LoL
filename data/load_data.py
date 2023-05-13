@@ -9,7 +9,7 @@ def _load_data(url):
     return data
 
 def load_old_data():
-    data_path = r"data\2023_LoL_esports_match_data_from_OraclesElixir_20230501.csv"
+    data_path = r"data/2023_LoL_esports_match_data_from_OraclesElixir_20230501.csv"
     year = data_path[-12:-8]
     day = data_path[-12:-4]
     day_textual = datetime.datetime.strptime(day, "%Y%m%d")
