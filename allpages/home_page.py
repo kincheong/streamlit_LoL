@@ -11,9 +11,7 @@ def app():
     # Home page description
     st.title("League of Legends Prediction App")
     st.write("""
-    Welcome to my first ever web-app! This app is aimed to help League of Legends players gauge their chances of winning a match
-    based on historical competitive data. It is mainly a platform for me to upskill in simple web development, data wrangling,
-    and machine learning. 
+    Welcome to my web app designed to assist League of Legends players in evaluating their chances of winning a match using historical competitive data. This project serves as an opportunity for me to enhance my skills in web development, data wrangling, and machine learning.
     """)
     st.write("[Github Source](https://github.com/kincheong/streamlit_LoL)")
     st.image("https://upload.wikimedia.org/wikipedia/commons/9/91/Octicons-mark-github.svg", width=30)
@@ -127,7 +125,7 @@ def app():
                     #self.user_df = self.user_df.style.apply(color_dupes,axis=None)            
                     
             st.markdown("##### User chosen champions")
-            st.dataframe(self.user_df)            
+            st.table(self.user_df) 
             
             
         def _predict(self):

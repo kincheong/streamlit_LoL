@@ -9,13 +9,13 @@ def _load_data(url):
     return data
 
 def load_old_data():
-    data_path = r"data/2022_LoL_esports_match_data_from_OraclesElixir_20220228.csv"
+    data_path = r"data\2023_LoL_esports_match_data_from_OraclesElixir_20230501.csv"
     year = data_path[-12:-8]
     day = data_path[-12:-4]
     day_textual = datetime.datetime.strptime(day, "%Y%m%d")
     day_textual = day_textual.strftime("%d %B %Y") 
 
-    url = "https://oracleselixir-downloadable-match-data.s3-us-west-2.amazonaws.com/" + year + "_LoL_esports_match_data_from_OraclesElixir_" + day + ".csv"
+    url = "https://datalisk-oe-dls-private.s3-us-west-2.amazonaws.com/" + year + "_LoL_esports_match_data_from_OraclesElixir_" + day + ".csv"
 
     with st.spinner("Loading Data"):
         global date_textual, data_link, data
@@ -30,7 +30,7 @@ def load_latest_data():
     yesterday_textual = yesterday.strftime("%d %B %Y")
     yesterday = yesterday.strftime("%Y%m%d")
 
-    url = "https://oracleselixir-downloadable-match-data.s3-us-west-2.amazonaws.com/" + year + "_LoL_esports_match_data_from_OraclesElixir_" + yesterday + ".csv"
+    url = "https://datalisk-oe-dls-private.s3-us-west-2.amazonaws.com/" + year + "_LoL_esports_match_data_from_OraclesElixir_" + yesterday + ".csv"
 
     with st.spinner("Loading Data"):
         try:
